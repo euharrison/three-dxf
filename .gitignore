@@ -7,3 +7,4 @@ build/
 dist/
 sample/node_modules/
 *.tgz
+.DS_Store
