@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { BufferGeometry, Color, Float32BufferAttribute, Vector3 } from 'three';
-import { OrbitControls } from './OrbitControls';
 import bSpline from './bspline';
 import { Text } from 'troika-three-text'
 import { parseDxfMTextContent } from '@dxfom/mtext';
@@ -153,20 +152,8 @@ export function Viewer(data, parent, width, height, font, margin) {
     parent.appendChild(renderer.domElement);
     parent.style.display = 'block';
 
-    //TODO: Need to make this an option somehow so others can roll their own controls.
-    var controls = new OrbitControls(camera, parent);
-    controls.target.x = camera.position.x;
-    controls.target.y = camera.position.y;
-    controls.target.z = 0;
-    controls.zoomSpeed = 3;
-
-    //Uncomment this to disable rotation (does not make much sense with 2D drawings).
-    //controls.enableRotate = false;
-
     this.render = function () { renderer.render(scene, camera) };
-    controls.addEventListener('change', this.render);
     this.render();
-    controls.update();
 
     this.resize = function (width, height) {
         var originalWidth = renderer.domElement.width;
